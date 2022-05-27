@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'orlen.apps.OrlenConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -78,8 +79,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': os.environ.get('MARIADB_DATABASE'),
-        'USER': os.environ.get('MARIADB_USER'),
-        'PASSWORD': os.environ.get('MARIADB_PASSWORD'),
+        'USER': 'root',
+        'PASSWORD': 'mariadb',
         'HOST': 'db',
         'PORT': '3306',
     }
