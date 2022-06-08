@@ -11,5 +11,12 @@ urlpatterns = [
     # ex: /polls/5/vote/
     path('<int:question_id>/vote/', views.vote, name='vote'),
 
-    path('stefan/', views.OperationDetailView.as_view())
+    path('getListOperations/', views.OperationListView.as_view()),
+    #path('getListOperations/', views.OperationListView.as_view()),
+    #path('getListOperations/', views.OperationListView.as_view()),
+    #path('getListOperations/', views.OperationListView.as_view()),
+    #path('getListOperations/', views.OperationListView.as_view()),
+
+    path('detailOperation/<int:pk>/', views.OperationDetailView.as_view()),
+
 ]
