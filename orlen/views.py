@@ -6,22 +6,6 @@ from rest_framework import mixins, generics
 from rest_framework.response import Response
 
 
-def index(request):
-    return HttpResponse("Hello, world. You're at the polls index.")
-
-
-def detail(request, question_id):
-    return HttpResponse("You're looking at question %s." % question_id)
-
-
-def results(request, question_id):
-    response = "You're looking at the results of question %s."
-    return HttpResponse(response % question_id)
-
-
-def vote(request, question_id):
-    return HttpResponse("You're voting on question %s." % question_id)
-
 
 class OperationListView(mixins.ListModelMixin,
                         mixins.CreateModelMixin,
@@ -36,6 +20,8 @@ class OperationListView(mixins.ListModelMixin,
 
 class OperationDetailView(mixins.CreateModelMixin,
                           mixins.RetrieveModelMixin,
+                          mixins.UpdateModelMixin,
+                          mixins.DestroyModelMixin,
                           generics.GenericAPIView):
     queryset = Operation.objects.all()
     serializer_class = OperationSerializer
@@ -45,3 +31,9 @@ class OperationDetailView(mixins.CreateModelMixin,
 
     def get(self, request, *args, **kwargs):
         return self.retrieve(request, *args, **kwargs)
+
+    def patch(self, request, *args, **kwargs):
+        return self.partial_update(request, *args, **kwargs)
+
+    def delete(self, request, *args, **kwargs):
+        return self.destroy(request, *args, **kwargs)

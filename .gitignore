@@ -1,3 +1,5 @@
 f.txt
 db.sqlite3
 data
+.coverage
+htmlcov
