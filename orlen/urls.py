@@ -4,8 +4,9 @@ from . import views
 
 urlpatterns = [
 
-    path('getListOperations/', views.OperationListView.as_view()),
+    path('operations/', views.OperationListView.as_view()),
 
-    path('detailOperation/<int:pk>/', views.OperationDetailView.as_view()),
+    path('operations/<int:pk>/', views.OperationDetailView.as_view()),
+
 
 ]
