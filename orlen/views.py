@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from .serializers import OperationSerializer, OperationListSerializer,OperationDetailSerializer
+from .serializers import OperationSerializer, OperationListSerializer, OperationDetailSerializer
 from .models import Operation, PetrolPump
 
 from rest_framework import mixins, generics
@@ -16,8 +16,9 @@ class OperationListView(mixins.ListModelMixin,
         if self.request.method == 'POST':
             return OperationSerializer
 
-    queryset = Operation.objects.raw(
-        'select orlen_operation.id,orlen_operation.date, orlen_operation.size, orlen_vehicle.name as "vehicle", orlen_petrolpump.name as "petrolpump" from orlen_operation join orlen_vehicle on orlen_vehicle.id=orlen_operation.id_vehicle_id join orlen_petrolpump on orlen_operation.id_petrol_pump_id=orlen_petrolpump.id')
+    def get_queryset(self):
+        return Operation.objects.raw(
+            'select orlen_operation.id,orlen_operation.date, orlen_operation.size, orlen_vehicle.name as "vehicle", orlen_petrolpump.name as "petrolpump" from orlen_operation join orlen_vehicle on orlen_vehicle.id=orlen_operation.id_vehicle_id join orlen_petrolpump on orlen_operation.id_petrol_pump_id=orlen_petrolpump.id')
 
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
